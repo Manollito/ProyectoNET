@@ -1,128 +1,52 @@
-﻿/*
-Primer proyecto en .NET
-*/
+﻿PersonaController controller = new PersonaController();
 
-/*
-Crear proyecto consola
-dotnet new console
+bool ejecutando = true;
 
-Ejecutar
-dotnet run
-
-Compilar
-dotnet build
-
-Crear proyecto web API
-dotnet new webapi
-
-Ver plantillas
-dotnet new list
-*/
-
-
-// Variables y tipos de datos
-
-int edad = 20;  //enteros
-double altura = 1.75;  //decimales
-bool esMayor = edad >= 18;  //booleanos
-string nombre = "Juan";  //texto
-
-
-//Imprimir en pantalla
-
-//Con salto de linea
-Console.WriteLine("Hola, " + nombre + "! Tienes " + edad + " años y mides " + altura + " metros.");
-
-//Sin salto de linea
-Console.Write("Hola ");
-Console.Write("mundo");
-
-//Pedir datos al usuario
-
-Console.Write("¿Cómo te llamas? ");
-string nombre = Console.ReadLine();
-
-//Convertir valores
-
-Console.Write("Edad: ");
-int edad = int.Parse(Console.ReadLine());
-Console.WriteLine("Tu edad es " + edad);
-
-//Condicionales
-
-if (edad >= 18)
+while (ejecutando)
 {
-    Console.WriteLine("Eres mayor de edad.");
-}
-else
-{
-    Console.WriteLine("Eres menor de edad.");
-}
+    PersonaView.MostrarMenu();
 
-//Operadores lógicos
-// && (AND), || (OR), ! (NOT)
+    if (int.TryParse(Console.ReadLine(), out int opcion))
+    {
+        switch (opcion)
+        {
+            case 1:
+                controller.VerPersonas();
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                break;
 
-//Ciclo While
+            case 2:
+                controller.AgregarPersona();
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                break;
 
-int contador = 0;
-while (contador < 5)
-{
-    Console.WriteLine("Contador: " + contador);
-    contador++;
-}
+            case 3:
+                controller.EliminarPersona();
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                break;
 
-//Ciclo For
-for (int i = 0; i < 5; i++)
-{
-    Console.WriteLine("Índice: " + i);
-}
+            case 4:
+                controller.ModificarPersona();
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                break;
 
-//Funciones con Parametros
-void Saludar(string nombre)
-{
-    Console.WriteLine("Hola, " + nombre + "!");
-}
+            case 5:
+                controller.BuscarPersona();
+                Console.WriteLine("Presione una tecla para continuar...");
+                Console.ReadKey();
+                break;
 
-Saludar("Manuel");
+            case 6:
+                ejecutando = false;
+                break;
 
-//Funciones que retornan valores
-
-int Sumar(int a, int b)
-{
-    return a + b;
-}
-
-int resultado = Sumar(5, 3);
-Console.WriteLine(resultado);
-
-//Arreglos
-int[] numeros = { 1, 2, 3, 4 };
-
-Console.WriteLine(numeros[0]);
-
-//Listas
-List<string> nombres = new List<string>();
-
-nombres.Add("Ana");
-nombres.Add("Luis");
-
-foreach (string nombre in nombres)
-{
-    Console.WriteLine(nombre);
-}
-
-//Strings modernos
-
-string nombre = "Manuel";
-
-Console.WriteLine($"Hola {nombre}");
-
-//Manejo básico de errores
-try
-{
-    int numero = int.Parse(Console.ReadLine());
-}
-catch
-{
-    Console.WriteLine("Eso no es un número");
+            default:
+                Console.WriteLine("Opción inválida");
+                break;
+        }
+    }
 }
